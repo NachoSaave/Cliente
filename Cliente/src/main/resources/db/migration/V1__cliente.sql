@@ -1,5 +1,5 @@
 CREATE TABLE cliente (
-    id INT AUTO_INCREMENT INT PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100),
     telefono VARCHAR(15)
 )
