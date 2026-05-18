@@ -2,30 +2,32 @@ package com.example.Cliente.Controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import lombok.RequiredArgsConstructor;
 
 import com.example.Cliente.Model.Cliente;
 import com.example.Cliente.Service.ClienteService;
 
-@Controller
-@RequestMapping("/clientes")
+@RestController
+@RequestMapping("/api/v1/clientes")
+@RequiredArgsConstructor
 public class ClienteController {
 
-    @Autowired
-    private ClienteService serv;
+    private final ClienteService serv;
 
     @GetMapping
-    public List<Cliente> listar(){
+    public List<Cliente> listar() {
         return serv.listar();
     }
 
+    @GetMapping("/{id}")
+    public Cliente buscarPorId(@PathVariable Long id) {
+        return serv.buscarPorId(id);
+    }
+
     @PostMapping
-    public Cliente crear(@RequestBody Cliente c){
+    public Cliente crear(@RequestBody Cliente c) {
         return serv.guardar(c);
     }
 }
